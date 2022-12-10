@@ -13,7 +13,7 @@ import networks
 from layers import disp_to_depth, ScaleRecovery
 
 
-def absoluteDepth(image_path, numpyPath):
+def absoluteDepth(image_path, numpyPath=None):
     model_path = "./"
 
     encoder_path = os.path.join(model_path, "encoder.pth")
@@ -90,7 +90,9 @@ def absoluteDepth(image_path, numpyPath):
     # Saving absolute depth `.npy` file
     absolute_depth_np = absolute_depth.squeeze().cpu().numpy()
     #np.save("assets/depth.npy", absolute_depth_np)
-    np.save(numpyPath, absolute_depth_np)
+    if numpyPath is not None:
+        np.save(numpyPath, absolute_depth_np)
+    return absolute_depth_np
 
 
 
